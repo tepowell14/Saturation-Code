@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import argparse
 import os, sys
 import h5py
