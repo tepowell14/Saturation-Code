@@ -50,6 +50,25 @@ print max_hybridPatterns
 #------------------------------------------------------
 #Print information of interest (average/max intensity)
 #------------------------------------------------------
+print "--------------------------"
+print "TOP 5 INTENSITIES [mJ/um2]"
+print "--------------------------"
+print "min = %.2e, max = %.2e" % (max_intensities.min(), max_intensities.max())
+print "mean = %.2e, std = %.2e" % (max_intensities.mean(), max_intensities.std())
+print "median = %.2e" % (np.median(max_intensities))
+
+#---------------------------------------------------------------------------------------------------------
+#Show and save 2-D images of maximum hybrid patterns
+#---------------------------------------------------------------------------------------------------------
+#Plotting max hybrid patterns
+current = 0
+for pattern in max_hybridPatterns:
+    plt.imshow(pattern, cmap = 'jet')
+    plt.colorbar(label = '[a.d.u.]')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title("Hybrid Pattern - run %d - intensity %d" %(args.run, max_intensities[current]))
+    current += 1
 
 #---------------------------------------------------------------------------------------------------------
 #Show and save 2-D image of maximum pixels values of patterns in a run (Input the y= lines to scan across)
