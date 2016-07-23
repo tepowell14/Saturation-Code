@@ -5,23 +5,23 @@ import os, sys
 import h5py
 import numpy as np
 import pylab
-import utils.cxiwriter
-import ipc.mpi
+# import utils.cxiwriter
+# import ipc.mpi
 
-this_dir = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(this_dir)
-#
-from backend import add_record
+# this_dir = os.path.dirname(os.path.realpath(__file__))
+# sys.path.append(this_dir)
+# #
+# from backend import add_record
 
 filename = '/reg/d/psdm/amo/amol3416/scratch/tpowell/intensities/r%04d_done.h5'
 
 #Parse command line arguments
-# parser = argparse.ArgumentParser(prog='saturation_threshold.py', description='Check for Saturated Regions')
-# parser.add_argument('run', type=int, help='Run number')
-# args = parser.parse_args()
+parser = argparse.ArgumentParser(prog='saturation_threshold.py', description='Check for Saturated Regions')
+parser.add_argument('run', type=int, help='Run number')
+args = parser.parse_args()
 
-from hummingbird import parse_cmdline_args
-args = parse_cmdline_args()
+# from hummingbird import parse_cmdline_args
+# args = parse_cmdline_args()
 
 with h5py.File(filename %args.run, 'r') as f:
     intensities = f['intensityMJUM2'][:]
@@ -75,8 +75,8 @@ print "median = %.2e" % (np.median(maxintensities_arr))
 #Saving to file
 
 # MPI
-main_worker = ipc.mpi.is_main_worker()
-rank = ipc.mpi.rank
+# main_worker = ipc.mpi.is_main_worker()
+# rank = ipc.mpi.rank
 
 #if do_save and ipc.mpi.is_worker():
 
