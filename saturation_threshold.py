@@ -5,7 +5,8 @@ import os, sys
 import h5py
 import numpy as np
 import pylab
-import utils.CXIWriter
+import utils.cxiwriter
+import ipc.mpi
 
 filename = '/reg/d/psdm/amo/amol3416/scratch/tpowell/intensities/r%04d_done.h5'
 
@@ -64,6 +65,13 @@ print "median = %.2e" % (np.median(maxintensities_arr))
 #---------------------------------------------------------------------------------------------------------
 
 #Saving to file
+
+# MPI
+main_worker = ipc.mpi.is_main_worker()
+rank = ipc.mpi.rank
+
+#if do_save and ipc.mpi.is_worker():
+
 w_dir = '/reg/d/psdm/amo/amol3416/scratch/tpowell/max_intensities'
 W = utils.CXIWriter(w_dir + "/r%04d.h5" %conf.run_nr, chunksize=1)
 
