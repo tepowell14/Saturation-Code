@@ -22,7 +22,7 @@ with h5py.File(filename %args.run, 'r') as f:
 #---------------------------------------------------------------------------------
 
 #Most intense hits
-max_intensities = []
+max_intensities = np.array([])
 
 for intensity in intensities:
     if len(max_intensities) != 5:
@@ -38,7 +38,7 @@ for intensity in intensities:
 print max_intensities
 
 # keep track of max_intensities indices to find corresponding hybrid patterns
-max_hybridPatterns = []
+max_hybridPatterns = np.array([])
 
 for i in max_intensities:
     dex = np.where(intensities==i)
