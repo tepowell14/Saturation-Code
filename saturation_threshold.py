@@ -15,6 +15,7 @@ args = parser.parse_args()
 
 with h5py.File(filename %args.run, 'r') as f:
     intensities = f['intensityMJUM2'][:]
+    Patterns = f['hybridPattern'][:]
 
 #---------------------------------------------------------------------------------
 #Find and save 5 most intense hits (expected to be hits with highest # lit pixels)
@@ -35,6 +36,16 @@ for intensity in intensities:
                 break
 
 print max_intensities
+
+# keep track of max_intensities indices to find corresponding hybrid patterns
+max_hybridPatterns = []
+
+for i in max_intensities:
+    dex = intensities.index(i)
+    print dex
+    max_hybridPatterns.append(Patterns[dex])
+
+print max_hybridPatterns
 
 #------------------------------------------------------
 #Print information of interest (average/max intensity)
