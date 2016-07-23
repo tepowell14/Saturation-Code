@@ -22,7 +22,7 @@ with h5py.File(filename %args.run, 'r') as f:
 #---------------------------------------------------------------------------------
 
 #Most intense hits
-max_intensities = np.array([])
+max_intensities = []
 
 for intensity in intensities:
     if len(max_intensities) != 5:
@@ -38,7 +38,7 @@ for intensity in intensities:
 print max_intensities
 
 # keep track of max_intensities indices to find corresponding hybrid patterns
-max_hybridPatterns = np.array([])
+max_hybridPatterns = []
 
 for i in max_intensities:
     dex = np.where(intensities==i)
@@ -50,12 +50,13 @@ print max_hybridPatterns
 #------------------------------------------------------
 #Print information of interest (average/max intensity)
 #------------------------------------------------------
+maxintensities_arr = np.array(max_intensities)
 print "--------------------------"
 print "TOP 5 INTENSITIES [mJ/um2]"
 print "--------------------------"
-print "min = %.2e, max = %.2e" % (max_intensities.min(), max_intensities.max())
-print "mean = %.2e, std = %.2e" % (max_intensities.mean(), max_intensities.std())
-print "median = %.2e" % (np.median(max_intensities))
+print "min = %.2e, max = %.2e" % (maxintensities_arr.min(), maxintensities_arr.max())
+print "mean = %.2e, std = %.2e" % (maxintensities_arr.mean(), maxintensities_arr.std())
+print "median = %.2e" % (np.median(maxintensities_arr))
 
 #---------------------------------------------------------------------------------------------------------
 #Show and save 2-D images of maximum hybrid patterns
