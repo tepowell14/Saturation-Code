@@ -41,7 +41,7 @@ print max_intensities
 max_hybridPatterns = []
 
 for i in max_intensities:
-    dex = np.where(intensity==i)[0][0]
+    dex = np.where(intensity==i)
     print dex
     max_hybridPatterns.append(Patterns[dex])
 
