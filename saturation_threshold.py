@@ -59,13 +59,25 @@ print "mean = %.2e, std = %.2e" % (maxintensities_arr.mean(), maxintensities_arr
 print "median = %.2e" % (np.median(maxintensities_arr))
 
 #---------------------------------------------------------------------------------------------------------
-#Show and save 2-D images of maximum hybrid patterns
+#Save maximum hybrid patterns & max intensities
 #---------------------------------------------------------------------------------------------------------
+
+#Saving to file
+D = {}
+D['maxhybridPattern'] = max_hybridPatterns
+D['maxintensityMJUM2'] = max_intensities
+W.write_slice(D)
+
+w_dir = '/reg/d/psdm/amo/amol3416/scratch/tpowell/max_intensities'
+donefile = w_dir + "/r%04d_top.h5" %conf.run_nr
+os.system('mv %s' %donefile)
+
+
 #Plotting max hybrid patterns
-current = 0
-for pattern in max_hybridPatterns:
-    plt.imshow(pattern, cmap = 'jet'); plt.colorbar(label = '[a.d.u.]'); plt.xlabel('x'); plt.ylabel('y'); plt.title("Hybrid Pattern - run %d - intensity %d" %(args.run, max_intensities[current]))
-    current += 1
+# current = 0
+# for pattern in max_hybridPatterns:
+#     plt.imshow(pattern, cmap = 'jet'); plt.colorbar(label = '[a.d.u.]'); plt.xlabel('x'); plt.ylabel('y'); plt.title("Hybrid Pattern - run %d - intensity %d" %(args.run, max_intensities[current]))
+#     current += 1
 #---------------------------------------------------------------------------------------------------------
 #Show and save 2-D image of maximum pixels values of patterns in a run (Input the y= lines to scan across)
 #---------------------------------------------------------------------------------------------------------
