@@ -4,7 +4,7 @@ import argparse
 import os, sys
 import h5py
 import numpy as np
-import matplotlib.pyplot as plt
+import pylab
 
 filename = '/reg/d/psdm/amo/amol3416/scratch/tpowell/intensities/r%04d_done.h5'
 
@@ -64,13 +64,8 @@ print "median = %.2e" % (np.median(maxintensities_arr))
 #Plotting max hybrid patterns
 current = 0
 for pattern in max_hybridPatterns:
-    plt.imshow(pattern, cmap = 'jet')
-    plt.colorbar(label = '[a.d.u.]')
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.title("Hybrid Pattern - run %d - intensity %d" %(args.run, max_intensities[current]))
+    plt.imshow(pattern, cmap = 'jet'); plt.colorbar(label = '[a.d.u.]'); plt.xlabel('x'); plt.ylabel('y'); plt.title("Hybrid Pattern - run %d - intensity %d" %(args.run, max_intensities[current]))
     current += 1
-
 #---------------------------------------------------------------------------------------------------------
 #Show and save 2-D image of maximum pixels values of patterns in a run (Input the y= lines to scan across)
 #---------------------------------------------------------------------------------------------------------
