@@ -11,6 +11,7 @@ filename = '/reg/d/psdm/amo/amol3416/scratch/tpowell/intensities/r%04d_done.h5'
 #Parse command line arguments
 parser = argparse.ArgumentParser(prog='saturation_threshold.py', description='Check for Saturated Regions')
 parser.add_argument('run', type=int, help='Run number')
+args = parser.parse_args()
 
 with h5py.File(filename %args.run, 'r') as f:
     intensities = f['intensityMJUM2'][:]
