@@ -1,0 +1,13 @@
+# PSANA
+test -f /reg/g/psdm/etc/ana_env.sh && . /reg/g/psdm/etc/ana_env.sh
+
+# Benedikt's site-packages
+export PYTHONPATH=/reg/neh/home/benedikt/.local/lib/python2.7/site-packages/:${PYTHONPATH}
+export PATH=/reg/neh/home/benedikt/local/bin:$PATH
+
+# Uppsala software (e.g. condor)
+export PATH=/reg/g/uppsala/local/bin:$PATH
+export LD_LIBRARY_PATH=/reg/g/uppsala/local/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/reg/g/uppsala/local/lib:$LD_LIBRARY_PATH
+export C_INCLUDE_PATH=/reg/g/uppsala/local/include:$C_INCLUDE_PATH
+export PYTHONPATH=/reg/g/uppsala/local/lib/python2.7/site-packages/:.:$PYTHONPATH
