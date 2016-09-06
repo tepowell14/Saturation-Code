@@ -9,6 +9,7 @@ import scipy.ndimage
 import matplotlib.pyplot as plt
 
 filename = '/reg/d/psdm/amo/amol3416/scratch/tpowell/intensities/r%04d_done.h5'
+#filename = '/reg/d/psdm/amo/amol3416/scratch/tpowell/hits/r%04d_hits_done.h5'
 
 #Parse command line arguments
 parser = argparse.ArgumentParser(prog='saturation_threshold.py', description='Check for Saturated Regions')
@@ -17,6 +18,7 @@ args = parser.parse_args()
 
 with h5py.File(filename %args.run, 'r') as f:
     intensities = f['intensityMJUM2'][:]
+    #intensities = f['hitscore'][:]
     Patterns = f['front'][:]
 
 #---------------------------------------------------------------------------------
@@ -52,6 +54,7 @@ for i in max_intensities:
 #Print information of interest (average/max intensity)
 #------------------------------------------------------
 maxintensities_arr = np.array(max_intensities)
+
 print "--------------------------"
 print "TOP 5 INTENSITIES [mJ/um2]"
 print "--------------------------"
@@ -59,6 +62,12 @@ print "min = %.2e, max = %.2e" % (maxintensities_arr.min(), maxintensities_arr.m
 print "mean = %.2e, std = %.2e" % (maxintensities_arr.mean(), maxintensities_arr.std())
 print "median = %.2e" % (np.median(maxintensities_arr))
 
+#print "--------------------------"
+#print "TOP 5 HITSCORES"
+#print "--------------------------"
+#print "min = %.2e, max = %.2e" % (maxintensities_arr.min(), maxintensities_arr.max())
+#print "mean = %.2e, std = %.2e" % (maxintensities_arr.mean(), maxintensities_arr.std())
+#print "median = %.2e" % (np.median(maxintensities_arr))
 
 #---------------------------------------------------------------------------------------------------------
 #2-D image of maximum pixels values of patterns in a run 
@@ -174,8 +183,11 @@ def plotting(thr_lines):
     axes[1].set_ylabel('Raw Pixel Value [a.d.u.]')
     axes[1].set_xlabel('x(fast changing dim.)')
 
-    plt.savefig('/reg/d/psdm/amo/amol3416/scratch/tpowell/max_intensities/r%04d_thresholds.png' %args.run)
+    fig.subplots_adjust(hspace=.5)
+    plt.tight_layout()
 
+    plt.savefig('/reg/d/psdm/amo/amol3416/scratch/tpowell/max_intensities/r%04d_thresholds.png' %args.run)
+    
     plt.show()
 
 plotting(False)
@@ -209,7 +221,10 @@ plotting(True)
 
 f = h5py.File('/reg/d/psdm/amo/amol3416/scratch/tpowell/max_intensities/r%04d_top.h5' %args.run, 'w')
 f.create_dataset('topscatteringPatterns', data = top_scatteringPatterns)
+
 f.create_dataset('maxintensityMJUM2', data = max_intensities)
+#f.create_dataset('maxhitscores', data = max_intensities)
+
 f.create_dataset('maxscatteringPattern', data = max_scattering)
 f.create_dataset('saturationThresholds', data = quad_thresholds)
 f.close()
